@@ -1,0 +1,27 @@
+- Proces Kodowania kodem Hamminga(15,11) jest zrealizowany za pomocą operacji macierzowych, w następujący sposób:
+
+Wektor słowa kodowego C jest generowany poprzez przemnożenie wektora (b) zawierającego bity informacji, przez macierz G powstałą w następujący sposób:
+
+C = b*G,
+
+G = [ P | Ik ]
+
+macierz G jest złączeniem dwóćh macierzy P oraz Ik, gdzie:
+
+	P - to macierz określająca bity parzystości
+	Ik - macierz jednostkowa o rozmiarze 11 x 11
+
+
+następnie wykonuje się na każdym elemencie wektora C operację modolu (%) 2, po czym następuje proces dekodowania:
+
+Macierz H jest złączeniem macierzy jednostkorej I o rozmiarze (4x4), z macierzą P^T (transponowaną), 
+
+obliczany jest wektor syndromu s (s = c * H^T), następnie wykonuje się na każdym jego elemencie operację modulo 2.
+
+Wykonując iloczyn skalarny wektora w = 1,2,4,8, z wektorem s (np. 0,1,1,0) otrzymujemy Syndrom S:
+
+-> jeśli S == 0 -> To zdekodowana wiadomość nie zawierała błędów i przekłamań, 
+   inaczej -> S wskazuje na indeks bitu X (np S = 6 -> X6) znajdującego się w wektorze C, wtedy trzeba zanegować ten bit, ponownie obliczyć wektor s (s = c*H^T), wykonać iloczyn skalarny wektorów s i w.
+
+Jeśli S == 0, oznacza to że sygnał został zdekodowany prawidłowo
+ 
